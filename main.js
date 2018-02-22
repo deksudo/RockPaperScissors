@@ -37,7 +37,17 @@ function playComputer() {
 	}
 }
 
-function game() {
+function game(){
+	let choices = document.querySelectorAll("#rock, #paper, #scissors");
+
+	for (let i = 0; i < choices.length; i++) {
+		choices[i].addEventListener("click", (e) => {console.log(e.target);});
+	}
+
+}
+
+
+function gameOld() {
 	let rounds = Number(prompt("How many rounds will you play?", "3"));
 	while (!rounds) {
 		rounds = Number(prompt("Enter a number.", "3"));
@@ -80,3 +90,6 @@ function checkPlayerInput(input) {
 	let validInputs = ["rock", "paper", "scissors"];
 	return input !== null && validInputs.indexOf(input.toLowerCase().trim()) != -1 ? true : false;
 }
+
+
+window.onload = game;
