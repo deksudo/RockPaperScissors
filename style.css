@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css?family=Kavivanar');
+
+* {
+	box-sizing: border-box;
+	font-family: 'Kavivanar', cursive;
+	color: white;
+}
+
+body {
+	background-color: #222;
+}
+
+.container {
+	position: absolute;
+	top: 0; left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.main {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -0%);
+	width: 70%;
+	max-width: 700px;
+}
+
+.center {
+	top: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	vertical-align: top;
+	margin-bottom: 50px;
+}
+
+.ui {
+	display: inline-block;
+	vertical-align: middle;
+	border-radius: 5px;
+	background-color: white;
+	padding: 5px;
+	margin: 2px 5px;
+	min-height: 100px;
+}
+
+#rock, #paper, #scissors {
+	width: 30%;
+	min-width: 150px;
+	background-size: auto 90%;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+#rock {
+	background-image: url("img/rock_fb.png");
+}
+
+#paper {
+	background-image: url("img/paper_fb.png");
+}
+
+#scissors {
+	background-image: url("img/scissors_fb.png");
+}
+
+#score {
+	width: 30%;
+
+}
+
+#computerSelection {
+	width:  50%;
+}
+
+#score, #computerSelection {
+	
+}

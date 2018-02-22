@@ -80,5 +80,3 @@ function checkPlayerInput(input) {
 	let validInputs = ["rock", "paper", "scissors"];
 	return input !== null && validInputs.indexOf(input.toLowerCase().trim()) != -1 ? true : false;
 }
-
-game();
