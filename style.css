@@ -45,6 +45,8 @@ body {
 	margin: 2px 5px;
 	min-height: 100px;
 	color: black;
+	line-height: 100px;
+	font-size: 22px;
 }
 
 .ui.selected {
