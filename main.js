@@ -1,26 +1,85 @@
-function playRound(playerSelection, computerSelection) {
-	playerSelection = playerSelection.toLowerCase().trim();
+function playRound(playerSelectedNode, computerNode, scoreNode) {
+	let computerSelection = playComputer();
+	let playerSelection = getPlayerSelection(playerSelectedNode).toLowerCase().trim();
 
+	//highlight player selection, computer selection and score. if the player wins, make the container transition to green bg. loses: red, draw: yellow
+	console.log(playerSelectedNode);
+	playerSelectedNode.classList.add("selected");
+
+	setTimeout(() => {
+		let selectionPictures = {
+			"rock" : "img/rock_fb.png",
+			"paper": "img/paper_fb.png",
+			"scissors": "img/scissors_fb.png"
+		}
+		computerNode.classList.add("selected");
+		setTimeout (() => {computerNode.style.backgroundImage = "url(" + selectionPictures[computerSelection] + ")";
+			setTimeout(() => {updateScore(result, scoreNode);}, 200)
+		}, 400)		
+	},200);
+
+
+	let result = "";
 	if (playerSelection == computerSelection) {
-		return "tie";
+		result = "tie";
 	}
 	else if (playerSelection == "rock") {
-		return computerSelection == "scissors" ? "won" : "lost";
+		result = computerSelection == "scissors" ? "won" : "lost";
 	}
 	else if (playerSelection == "paper") {
-		return computerSelection == "rock" ? "won" : "lost";
+		result = computerSelection == "rock" ? "won" : "lost";
 	}
 	else if (playerSelection == "scissors") {
-		return computerSelection == "paper" ? "won" : "lost";
+		result = computerSelection == "paper" ? "won" : "lost";
 	}
 	else {
-		return "unknown combination";
+		throw "unknown combination";
 	}
+
+	setTimeout(() => {resetPlayground(playerSelectedNode, computerNode)}, 2000);
+
 
 }
 
+function resetPlayground(playerNode, computerNode) {
+	playerNode.classList.remove("selected");
+	computerNode.style.backgroundImage = "none";
+	computerNode.classList.remove("selected");
+}
+
+function lockOptions(lock) {
+	if (lock) {
+
+	}
+}
+
+function updateScore(result, scoreNode) {
+	let score = result === "won" ? 1 : result == "lost" ? -1 : 0;
+
+	let colorWarning = ["#af2b2b", "#b7a643", "#379b30"];
+	let mainContainer = document.querySelector(".main");
+	mainContainer.style.backgroundColor = colorWarning[score+1];
+	setTimeout(()=>{mainContainer.style.backgroundColor = "";},400)
+
+	let currentTotalScore = 0;
+	let newScore = 0;
+	if (parseInt(scoreNode.textContent)) {
+		currentTotalScore = parseInt(scoreNode.textContent);
+		newScore = currentTotalScore + score;
+	}
+
+	else {
+		newScore = score;
+	}
+
+	scoreNode.textContent = newScore;
+}
+
+
+
 function playComputer() {
-	let selection = Math.floor((Math.random()*3)+1);
+	//array of bgimages. here or global?
+	let selection = Math.floor((Math.random()*3))+1;
 	switch (selection) {
 		case 1:
 			return "rock";
@@ -32,18 +91,32 @@ function playComputer() {
 			return "scissors";
 			break;
 		default:
-			return "error: check random number generation.";
+			throw "computer selection is not recognized!";
 			break;
 	}
 }
 
-function game(){
+function initialize(){
 	let choices = document.querySelectorAll("#rock, #paper, #scissors");
+	let computerNode = document.getElementById("computerSelection");
+	score = document.getElementById("score");
 
 	for (let i = 0; i < choices.length; i++) {
-		choices[i].addEventListener("click", (e) => {console.log(e.target);});
+		choices[i].addEventListener("click", (e) => {playRound(e.target, computerNode, score)});
 	}
+}
 
+
+
+function getPlayerSelection(domNode) {
+	console.log(domNode);
+	let selection = domNode.getAttribute("id");
+
+	if(checkPlayerInput(selection)) {
+		return selection;
+	}
+	else
+	{ throw "player input is not recognized!"; }
 }
 
 
@@ -92,4 +165,4 @@ function checkPlayerInput(input) {
 }
 
 
-window.onload = game;
+window.onload = initialize;

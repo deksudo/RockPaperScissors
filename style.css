@@ -23,6 +23,7 @@ body {
 	transform: translate(-50%, -0%);
 	width: 70%;
 	max-width: 700px;
+	transition: background-color 0.2s;
 }
 
 .center {
@@ -39,14 +40,23 @@ body {
 	vertical-align: middle;
 	border-radius: 5px;
 	background-color: white;
+	transition: background-color 0.2s;
 	padding: 5px;
 	margin: 2px 5px;
 	min-height: 100px;
+	color: black;
+}
+
+.ui.selected {
+	background-color: yellow;
 }
 
 #rock, #paper, #scissors {
 	width: 30%;
 	min-width: 150px;
+}
+
+#rock, #paper, #scissors, #computerSelection {	
 	background-size: auto 90%;
 	background-repeat: no-repeat;
 	background-position: center center;
